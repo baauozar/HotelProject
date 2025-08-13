@@ -1,0 +1,35 @@
+﻿@model UpdateStaffViewModal
+@{
+    ViewData["Title"] = "Edittaff";
+    Layout = "~/Views/AdminLayout/_AdminLayout.cshtml";
+}
+
+<form method="post">
+    <input type="hidden" asp-for="StaffID" />
+    <div class="form-group">
+        <label asp-for="Name">Personal adi</label>
+        <input asp-for="Name" class="form-control" />
+        <span asp-validation-for="Name" class="text-danger"></span>
+    </div>
+    <div class="form-group">
+        <label asp-for="Title">Personal unvani</label>
+        <input asp-for="Title" class="form-control" />
+        <span asp-validation-for="Title" class="text-danger"></span>
+    </div>
+    <div class="form-group">
+        <label asp-for="SocialMedia1">Social Media1</label>
+        <input asp-for="SocialMedia1" class="form-control" />
+        <span asp-validation-for="SocialMedia1" class="text-danger"></span>
+    </div>
+    <div class="form-group">
+        <label asp-for="SocialMedia2">Social Media1 2</label>
+        <input asp-for="SocialMedia2" class="form-control" />
+        <span asp-validation-for="SocialMedia1" class="text-danger"></span>
+    </div>
+    <div class="form-group">
+        <label asp-for="SocialMedia3">Social Media1 3</label>
+        <input asp-for="SocialMedia3" class="form-control" />
+        <span asp-validation-for="SocialMedia1" class="text-danger"></span>
+    </div>
+    <button type="submit" class="btn btn-primary">Kaydet</button>
+</form>
