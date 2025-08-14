@@ -4,6 +4,8 @@ builder.Configuration
     .AddJsonFile($"appsettings.{builder.Environment.EnvironmentName}.json", optional: true, reloadOnChange: true)
      .AddEnvironmentVariables()
     .AddUserSecrets<Program>();
+builder.Services.AddAutoMapper(cfg => { }, typeof(Program).Assembly);
+
 // Add services to the container.
 builder.Services.AddHttpClient();
 builder.Services.AddControllersWithViews();
