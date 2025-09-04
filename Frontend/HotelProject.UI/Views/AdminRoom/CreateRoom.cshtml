@@ -1,0 +1,50 @@
+﻿@model CreateRoomDto
+@{
+    ViewData["Title"] = "CreateRoom";
+    Layout = "~/Views/AdminLayout/_AdminLayout.cshtml";
+}
+
+<form method="post" asp-action="CreateRoom" asp-controller="AdminRoom">
+    <div class="form-group">
+        <label asp-for="RoomNumber">Room Number</label>
+        <input asp-for="RoomNumber" class="form-control" />
+        <span asp-validation-for="RoomNumber" class="text-danger"></span>
+    </div>
+    <div class="form-group">
+        <label asp-for="RoomCoverImage">Room Cover Image</label>
+        <input asp-for="RoomCoverImage" class="form-control" />
+        <span asp-validation-for="RoomCoverImage" class="text-danger"></span>
+    </div>
+    <div class="form-group">
+        <label asp-for="Price">Room Price</label>
+        <input asp-for="Price" class="form-control" />
+        <span asp-validation-for="Price" class="text-danger"></span>
+    </div>
+    <div class="form-group">
+        <label asp-for="Title">Room Title</label>
+        <input asp-for="Title" class="form-control" />
+        <span asp-validation-for="Title" class="text-danger"></span>
+    </div>
+    <div class="form-group">
+        <label asp-for="BedCount">Bed Count</label>
+        <input asp-for="BedCount" class="form-control" />
+        <span asp-validation-for="BedCount" class="text-danger"></span>
+    </div>
+    <div class="form-group">
+        <label asp-for="BathCount">Bath Count</label>
+        <input asp-for="BathCount" class="form-control" />
+        <span asp-validation-for="BathCount" class="text-danger"></span>
+    </div>
+    <div class="form-group">
+        <label asp-for="wifi">wifi</label>
+        <input asp-for="wifi" class="form-control" />
+        <span asp-validation-for="wifi" class="text-danger"></span>
+    </div>
+    <div class="form-group">
+        <label asp-for="Description">Room Description</label>
+        <input asp-for="Description" class="form-control" />
+        <span asp-validation-for="Description" class="text-danger"></span>
+    </div>
+    <button type="submit" class="btn btn-primary">Save</button>
+</form>
+

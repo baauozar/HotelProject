@@ -17,7 +17,7 @@ namespace HotelProject.WebApi.Controllers
         }
 
         [HttpGet]
-        public IActionResult RoonList()
+        public IActionResult StaffList()
         {
             var values= _staffService.TGetList();
             return Ok(values);
@@ -47,6 +47,12 @@ namespace HotelProject.WebApi.Controllers
         public IActionResult Getstaff(int id)
         {
             var value = _staffService.TGetByID(id);
+            return Ok(value);
+        }
+        [HttpGet("LastForStaff")]
+        public IActionResult LastForStaff()
+        {
+            var value = _staffService.TGetStaffList();
             return Ok(value);
         }
     }

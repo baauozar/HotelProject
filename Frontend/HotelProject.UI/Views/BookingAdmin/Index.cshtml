@@ -1,0 +1,81 @@
+﻿@model List<ResultBookingDto>
+@{
+    ViewData["Title"] = "Index";
+    Layout = "~/Views/AdminLayout/_AdminLayout.cshtml";
+    int count = 1;
+}
+
+<div class="col-lg-12">
+    <div class="card">
+        <div class="card-body">
+            <div class="card-title">
+                <h4>Reservations</h4>
+            </div>
+            <div class="table-responsive">
+                <table class="table table-striped">
+                    <thead>
+                        <tr>
+                            <th>#</th>
+                            <th>Guest</th>
+                            <th>Check in</th>
+                            <th>Check out</th>
+                            <th>Status</th>
+                       
+                        </tr>
+                    </thead>
+                    <tbody>
+                        @foreach(var item in Model)
+                        {
+                            <tr>
+                                <th>@count</th>
+                                <td>@item.Name</td>
+                                <td>@item.Checkin.ToShortDateString()</td>
+                                <td>@item.CheckOut.ToShortDateString()</td>
+                                <td>
+                                    @if (item.Status == "Awaiting Approval"){
+
+                                  <span class="badge badge-info px-2">@item.Status</span>
+                                   }
+
+                                    @if (item.Status == "Approved"){
+
+                                  <span class="badge badge-success px-2">@item.Status</span>
+                                   }
+
+
+
+                                    @if (item.Status == "Cancel"){
+                                   <span class="badge badge-danger px-2">@item.Status</span>
+                                   }
+
+
+
+                                    @if (item.Status == "On hold"){
+                                   <span class="badge badge-warning px-2">@item.Status</span>
+                                     }
+                                
+
+                                  @*  @if(item.Status == "Guncellendi"){
+                                         <span class="badge badge-info px-2">@item.Status</span>
+                                    } *@
+                                 
+                                </td>
+
+                                <td><a href="/bookingAdmin/Approved/@item.BookingID" class="btn btn-outline-primary">Approve</a></td>
+                                <td><a href="/bookingAdmin/Decline/@item.BookingID" class="btn btn-outline-danger"> Cancel</a></td>
+                                <td><a href="/bookingAdmin/Waiting/@item.BookingID" class="btn btn-outline-warning">On hold</a></td>
+                                <td><a href="#" class="btn btn-outline-info">Update</a></td>
+                                <td><a href="#" class="btn btn-outline-dark">Details</a></td>
+                            </tr>
+                            count++;
+                        }
+
+                      
+                     
+                    </tbody>
+                </table>
+            </div>
+        </div>
+    </div>
+</div>
+

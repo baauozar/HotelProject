@@ -2,35 +2,37 @@
 @{
     ViewData["Title"] = "Index";
     Layout = "~/Views/AdminLayout/_AdminLayout.cshtml";
+    int counter = 0;
 }
 
 <table class="table table-bordered">
     <tr>
         <th>#</th>
-        <th>Personal adi</th>
-        <th>Personal Unvan</th>
-        <th>Sil</th>
-        <th>Guncelle</th>
-        <th>Detaylar</th>
+        <th>personal Name</th>
+        <th>Personal Position</th>
+        <th>Delete</th>
+        <th>Update</th>
+        <th>Detaıls</th>
     </tr>
     @foreach(var item in Model)
     {
+        counter++;
         <tr>
-            <td>@item.StaffID</td>
+            <td>@counter</td>
             <td>@item.Name</td>
             <td>@item.Title</td>
             <td>
-                <a asp-action="DeleteStaff" asp-controller="Staff" asp-route-id="@item.StaffID" class="btn mb-1 btn-rounded btn-outline-danger">Sil</a>
+                <a asp-action="DeleteStaff" asp-controller="Staff" asp-route-id="@item.StaffID" class="btn mb-1 btn-rounded btn-outline-danger">Delete</a>
             </td>
             <td>
-                <a asp-action="EditStaff" asp-controller="Staff" asp-route-id="@item.StaffID" class="btn mb-1 btn-rounded  btn-outline-primary">Guncelle</a>
+                <a asp-action="EditStaff" asp-controller="Staff" asp-route-id="@item.StaffID" class="btn mb-1 btn-rounded  btn-outline-primary">Update</a>
             </td>
             <td>
-                <a asp-action="Details" asp-controller="Staff" asp-route-id="@item.StaffID" class="btn mb-1 btn-rounded btn-outline-info">Detaylar</a>
+                <a asp-action="Details" asp-controller="Staff" asp-route-id="@item.StaffID" class="btn mb-1 btn-rounded btn-outline-info">Details</a>
             </td>
         </tr>
     }
 
 </table>
 
-<a href="/staff/CreateStaff"class="btn btn-info">Yeni Personal Grisi</a>
+<a href="/staff/CreateStaff" class="btn btn-info">New Personal entry</a>

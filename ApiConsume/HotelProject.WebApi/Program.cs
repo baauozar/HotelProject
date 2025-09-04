@@ -1,12 +1,14 @@
+using AutoMapper;
 using HotelProject.BusinessLayer.Abstract;
 using HotelProject.BusinessLayer.Concrete;
 using HotelProject.DataAccessLayer.Abstract;
 using HotelProject.DataAccessLayer.Concrete;
 using HotelProject.DataAccessLayer.EntityFramework;
 using HotelProject.EntityLayer.Concrete;
+using HotelProject.WebApi.Extension;
 using Microsoft.EntityFrameworkCore;
-using AutoMapper;
 using System;
+using System.Text.Json.Serialization;
 
 var builder = WebApplication.CreateBuilder(args);
 builder.Configuration
@@ -17,28 +19,18 @@ builder.Configuration
 
 // Add services to the container.
 
-builder.Services.AddControllers();
+builder.Services.AddControllers()
+    .AddJsonOptions(options =>
+    {
+        options.JsonSerializerOptions.ReferenceHandler = ReferenceHandler.IgnoreCycles;
+    });
 // Learn more about configuring Swagger/OpenAPI at https://aka.ms/aspnetcore/swashbuckle
 builder.Services.AddEndpointsApiExplorer();
 builder.Services.AddSwaggerGen();
 builder.Services.AddDbContext<Context>(options =>
     options.UseSqlServer(builder.Configuration.GetConnectionString("DefaultConnection")));
 
-// Add your manager as scoped
-builder.Services.AddScoped<IStaffDal,EfStaffDal>();
-builder.Services.AddScoped<IStaffService,StaffManager>();
-
-builder.Services.AddScoped<IServicesDal, EfServiceDal>();
-builder.Services.AddScoped<IServiceService, ServiceManager>();
-
-builder.Services.AddScoped<IRoomDal, EfRoomDal>();
-builder.Services.AddScoped<IRoomService, RoomManager>();
-
-builder.Services.AddScoped<ITestimonialDal, EfTestimonialDal>();
-builder.Services.AddScoped<ITestimonialService, TestimonialManager>();
-
-builder.Services.AddScoped<ISubscribeDal, EfSubscribeDal>();
-builder.Services.AddScoped<ISubscribeService, SubscribeManager>();
+builder.Services.AddBusinessServices(); // Extension method to add all services
 builder.Services.AddAutoMapper(cfg => { }, typeof(Program).Assembly); 
 builder.Services.AddCors(opt =>
 {

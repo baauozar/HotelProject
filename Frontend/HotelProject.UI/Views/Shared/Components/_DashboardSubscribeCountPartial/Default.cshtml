@@ -1,0 +1,152 @@
+﻿@model ResultInstagramFollowersDto
+
+<div class="row">
+    <div class="col-lg-3 col-sm-6">
+        <div class="card">
+            <div class="social-graph-wrapper widget-facebook">
+                <span class="s-icon"><i class="fa fa-facebook"></i></span>
+            </div>
+            <div class="row">
+                <div class="col-6 border-right">
+                    <div class="pt-3 pb-3 pl-0 pr-0 text-center">
+                        <h4 class="m-1">89k</h4>
+                        <p class="m-0">Friends</p>
+                    </div>
+                </div>
+                <div class="col-6">
+                    <div class="pt-3 pb-3 pl-0 pr-0 text-center">
+                        <h4 class="m-1">119k</h4>
+                        <p class="m-0">Followers</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <div class="col-lg-3 col-sm-6">
+        <div class="card">
+            <div class="social-graph-wrapper widget-instagram">
+                <span class="s-icon"><i class="fa fa-instagram"></i></span>
+            </div>
+            <div class="row">
+                <div class="col-6 border-right">
+                    <div class="pt-3 pb-3 pl-0 pr-0 text-center">
+                        <h4 class="m-1">@Model.follower_count</h4>
+                        <p class="m-0">Followers</p>
+                    </div>
+                </div>
+                <div class="col-6">
+                    <div class="pt-3 pb-3 pl-0 pr-0 text-center">
+                        <h4 class="m-1">@Model.following_count</h4>
+                        <p class="m-0">Following</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <style>
+        /* Instagram widget to match other social widgets */
+        .widget-instagram {
+            background: linear-gradient(to right, #feda75, #fa7e1e, #d62976, #962fbf, #4f5bd5);
+            padding: 20px;
+            text-align: center;
+            position: relative;
+            height: 80px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+        }
+
+            .widget-instagram .s-icon {
+                width: 40px;
+                height: 40px;
+                background: rgba(255, 255, 255, 0.3);
+                border-radius: 10px;
+                display: flex;
+                align-items: center;
+                justify-content: center;
+                font-size: 24px;
+                color: #fff;
+                /* Remove all the positioning that's causing issues */
+                margin: 0;
+                position: relative; /* Changed from absolute */
+                /* Remove left and transform properties */
+            }
+
+                .widget-instagram .s-icon i {
+                    line-height: 1;
+                    display: block;
+                    margin: 0;
+                }
+
+        /* Ensure card styling matches */
+        .social-graph-wrapper {
+            margin: 0;
+            border-radius: 4px 4px 0 0;
+        }
+
+        /* Match the text styling below */
+        .card .row {
+            margin: 0;
+        }
+
+        .card .col-6 {
+            padding: 0;
+        }
+
+        .card h4 {
+            font-size: 24px;
+            font-weight: 600;
+            color: #333;
+        }
+
+        .card p {
+            color: #999;
+            font-size: 14px;
+        }
+    </style>
+    
+    <div class="col-lg-3 col-sm-6">
+        <div class="card">
+            <div class="social-graph-wrapper widget-googleplus">
+                <span class="s-icon"><i class="fa fa-google-plus"></i></span>
+            </div>
+            <div class="row">
+                <div class="col-6 border-right">
+                    <div class="pt-3 pb-3 pl-0 pr-0 text-center">
+                        <h4 class="m-1">89k</h4>
+                        <p class="m-0">Friends</p>
+                    </div>
+                </div>
+                <div class="col-6">
+                    <div class="pt-3 pb-3 pl-0 pr-0 text-center">
+                        <h4 class="m-1">119k</h4>
+                        <p class="m-0">Followers</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    <div class="col-lg-3 col-sm-6">
+        <div class="card">
+            <div class="social-graph-wrapper widget-twitter">
+                <span class="s-icon"><i class="fa fa-twitter"></i></span>
+            </div>
+            <div class="row">
+                <div class="col-6 border-right">
+                    <div class="pt-3 pb-3 pl-0 pr-0 text-center">
+                        <h4 class="m-1">89k</h4>
+                        <p class="m-0">Friends</p>
+                    </div>
+                </div>
+                <div class="col-6">
+                    <div class="pt-3 pb-3 pl-0 pr-0 text-center">
+                        <h4 class="m-1">119k</h4>
+                        <p class="m-0">Followers</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>

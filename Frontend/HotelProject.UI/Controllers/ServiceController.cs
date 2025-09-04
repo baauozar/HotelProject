@@ -1,4 +1,6 @@
 ﻿using AutoMapper;
+using FluentValidation;
+using HotelProject.UI.Dtos.AboutDto;
 using HotelProject.UI.Dtos.Service;
 using HotelProject.UI.Model.Staff;
 using Microsoft.AspNetCore.Mvc;
@@ -7,22 +9,29 @@ using System.Text;
 
 namespace HotelProject.UI.Controllers
 {
-    public class ServiceController : Controller
+    public class ServiceController : BaseController
     {
         private readonly IHttpClientFactory httpClientFactory;
         private readonly IMapper mapper;
+        private readonly IValidator<CreateServiceDto> _createValidator;
+        private readonly IValidator<UpdateServiceDto> _updateValidator;
+        private readonly IConfiguration _configuration;
+        private readonly string _apiBaseUrl;
 
-       
-        public ServiceController(IHttpClientFactory httpClientFactory, IMapper mapper)
+        public ServiceController(IHttpClientFactory httpClientFactory, IMapper mapper, IValidator<CreateServiceDto> createValidator, IValidator<UpdateServiceDto> updateValidator, IConfiguration configuration)
         {
             this.httpClientFactory = httpClientFactory;
             this.mapper = mapper;
+            _createValidator = createValidator;
+            _updateValidator = updateValidator;
+            _configuration = configuration;
+            _apiBaseUrl = _configuration["ApiSettings:BaseUrl"];
         }
 
         public async Task<IActionResult> Index()
         {
             var client = httpClientFactory.CreateClient();
-            var ResponseMessage = await client.GetAsync("https://localhost:44369/api/Service");
+            var ResponseMessage = await client.GetAsync($"{_apiBaseUrl}/api/Service");
             if (ResponseMessage.IsSuccessStatusCode)
             {
                 var jsonData = await ResponseMessage.Content.ReadAsStringAsync();
@@ -45,14 +54,18 @@ namespace HotelProject.UI.Controllers
         [HttpPost]
         public async Task<IActionResult> CreateService(CreateServiceDto model)
         {
-            if(!ModelState.IsValid)
+            if (!await ValidateAsync(model, _createValidator, ModelState))
+            {
+                return View(model);
+            }
+            if (!ModelState.IsValid)
             {
                 return View(); // Return the view with validation errors
             }
             var client = httpClientFactory.CreateClient();
             var jsonData = JsonConvert.SerializeObject(model);
             StringContent content = new StringContent(jsonData, Encoding.UTF8, "application/json");
-            var responseMessage = await client.PostAsync("https://localhost:44369/api/Service", content);
+            var responseMessage = await client.PostAsync($"{_apiBaseUrl}/api/Service", content);
             if (responseMessage.IsSuccessStatusCode)
             {
                 // Optionally, you can redirect to the index or another action
@@ -68,7 +81,7 @@ namespace HotelProject.UI.Controllers
         public async Task<IActionResult> DeleteService(int id)
         {
             var client = httpClientFactory.CreateClient();
-            var responseMessage = await client.DeleteAsync($"https://localhost:44369/api/Service/{id}");
+            var responseMessage = await client.DeleteAsync($"{_apiBaseUrl}/api/Service/{id}");
             if (responseMessage.IsSuccessStatusCode)
             {
                 // Optionally, you can redirect to the index or another action
@@ -85,7 +98,7 @@ namespace HotelProject.UI.Controllers
         public async Task<IActionResult> EditService(int id)
         {
             var client = httpClientFactory.CreateClient();
-            var responseMessage = await client.GetAsync($"https://localhost:44369/api/Service/{id}");
+            var responseMessage = await client.GetAsync($"{_apiBaseUrl}/api/Service/{id}");
             if (responseMessage.IsSuccessStatusCode)
             {
                 /*
@@ -110,6 +123,10 @@ namespace HotelProject.UI.Controllers
         [HttpPost]
         public async Task<IActionResult> EditService(UpdateServiceDto model)
         {
+            if (!await ValidateAsync(model, _updateValidator, ModelState))
+            {
+                return View(model);
+            }
             if (!ModelState.IsValid)
             {
                 return View(); // Return the view with validation errors
@@ -117,7 +134,7 @@ namespace HotelProject.UI.Controllers
             var client = httpClientFactory.CreateClient();
             var jsondata = JsonConvert.SerializeObject(model);
             StringContent content = new StringContent(jsondata, Encoding.UTF8, "application/json");
-            var responseMessage = await client.PutAsync("https://localhost:44369/api/Service/", content);
+            var responseMessage = await client.PutAsync($"{_apiBaseUrl}/api/Service/", content);
             if (responseMessage.IsSuccessStatusCode)
             {
                 return RedirectToAction("Index");

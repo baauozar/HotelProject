@@ -1,14 +1,17 @@
 ﻿using HotelProject.DataAccessLayer.EntityFramework;
 using HotelProject.UI.Dtos.LoginDto;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Mvc;
 
 namespace HotelProject.UI.Controllers
 {
+    [AllowAnonymous]
     public class LoginController : Controller
     {
         private readonly SignInManager<AppUser> signInManager;
-public LoginController(SignInManager<AppUser> signInManager)
+
+        public LoginController(SignInManager<AppUser> signInManager)
         {
             this.signInManager = signInManager;
         }
@@ -22,6 +25,7 @@ public LoginController(SignInManager<AppUser> signInManager)
         {
             if(ModelState.IsValid)
             {
+
                 var result = await signInManager.PasswordSignInAsync(loginUserDto.Username, loginUserDto.Password, false, false);
                 if(result.Succeeded)
                 {
@@ -33,6 +37,13 @@ public LoginController(SignInManager<AppUser> signInManager)
                 }
             }
             return View();
+        }
+        [HttpGet]
+       
+        public async Task<IActionResult> Logout()
+        {
+            await signInManager.SignOutAsync();
+            return RedirectToAction("Index", "Default");
         }
     }
 }

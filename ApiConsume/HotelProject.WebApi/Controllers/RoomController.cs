@@ -30,7 +30,7 @@ namespace HotelProject.WebApi.Controllers
 
             return Ok();
         }
-        [HttpDelete]
+        [HttpDelete("{id}")]
         public IActionResult DeleteRoom(int id)
         {
             var value = _roomService.TGetByID(id);
@@ -43,11 +43,12 @@ namespace HotelProject.WebApi.Controllers
             _roomService.TUpdate(room);
             return Ok();
         }
-        [HttpGet("(id)")]
+        [HttpGet("{id}")]
         public IActionResult GetRoom(int id)
         {
             var value = _roomService.TGetByID(id);
             return Ok(value);
         }
+     
     }
 }

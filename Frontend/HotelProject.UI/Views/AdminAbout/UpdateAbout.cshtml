@@ -1,0 +1,42 @@
+﻿@model UpdateAboutDto
+@{
+    ViewData["Title"] = "UpdateAbout";
+    Layout = "~/Views/AdminLayout/_AdminLayout.cshtml";
+}
+
+<form method="post">
+    <input type="hidden" asp-for="AboutId" />
+    <div class="form-group">
+        <label asp-for="Title1">Title 1</label>
+        <input asp-for="Title1" class="form-control" />
+        <span asp-validation-for="Title1" class="text-danger"></span>
+    </div>
+    <div class="form-group">
+        <label asp-for="Title2">Title 2</label>
+        <input asp-for="Title2" class="form-control" />
+        <span asp-validation-for="Title2" class="text-danger"></span>
+    </div>
+    <div class="form-group">
+        <label asp-for="Content">Body Content</label>
+        <input asp-for="Content" class="form-control" />
+        <span asp-validation-for="Content" class="text-danger"></span>
+    </div>
+    <div class="form-group">
+        <label asp-for="StaffCount">Staff Count</label>
+        <input asp-for="StaffCount" class="form-control" />
+        <span asp-validation-for="StaffCount" class="text-danger"></span>
+    </div>
+    <div class="form-group">
+        <label asp-for="RoomCount">Room Count</label>
+        <input asp-for="RoomCount" class="form-control" />
+        <span asp-validation-for="RoomCount" class="text-danger"></span>
+    </div>
+    <div class="form-group">
+        <label asp-for="CustomerCount">User Count</label>
+        <input asp-for="CustomerCount" class="form-control" />
+        <span asp-validation-for="CustomerCount" class="text-danger"></span>
+    </div>
+
+    <button type="submit" class="btn btn-primary">Save</button>
+</form>
+

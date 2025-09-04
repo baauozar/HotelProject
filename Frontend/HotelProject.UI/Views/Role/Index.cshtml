@@ -1,0 +1,39 @@
+﻿@model List<HotelProject.EntityLayer.Concrete.AppRole>
+@{
+    ViewData["Title"] = "Index";
+    Layout = "~/Views/AdminLayout/_AdminLayout.cshtml";
+}
+
+<h1>Role Page</h1>
+<table class="table table-bordered">
+    <thead>
+        <tr>
+            <th>#</th>
+            <th>Role Name</th>
+            <th>Delete</th>
+            <th>Update</th>
+
+        </tr>
+    </thead>
+    <tbody>
+        @foreach (var item in Model)
+        {
+            <tr>
+                <td>@item.Id</td>
+                <td>@item.Name</td>
+            
+
+                <td>
+                    <a asp-action="DeleteRole" asp-route-id="@item.Id" class="btn mb-1 btn-rounded btn-outline-danger">Delete</a>
+
+                </td>
+                <td>
+                    <a asp-action="UpdateRole" asp-route-id="@item.Id" class="btn mb-1 btn-rounded btn-outline-info">Edit</a>
+
+                </td>
+            </tr>
+        }
+    </tbody>
+
+</table>
+<a asp-action="AddRole" class="btn mb- btn-outline-primary">Add Role</a>

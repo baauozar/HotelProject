@@ -9,16 +9,20 @@ namespace HotelProject.UI.Controllers
     public class TestimonialController : Controller
     {
         private readonly IHttpClientFactory httpClientFactory;
-
-        public TestimonialController(IHttpClientFactory httpClientFactory)
+        private readonly IConfiguration _configuration;
+        private readonly string _apiBaseUrl;
+        public TestimonialController(IHttpClientFactory httpClientFactory, IConfiguration configuration)
         {
             this.httpClientFactory = httpClientFactory;
+            _configuration = configuration;
+            _apiBaseUrl = _configuration["ApiSettings:BaseUrl"];
+
         }
 
         public async Task<IActionResult> Index()
         {
             var client = httpClientFactory.CreateClient();
-            var ResponseMessage = await client.GetAsync("https://localhost:44369/api/Testimonial");
+            var ResponseMessage = await client.GetAsync($"{_apiBaseUrl}/api/Testimonial");
             if (ResponseMessage.IsSuccessStatusCode)
             {
                 var jsonData = await ResponseMessage.Content.ReadAsStringAsync();
@@ -44,7 +48,7 @@ namespace HotelProject.UI.Controllers
             var client = httpClientFactory.CreateClient();
             var jsonData = JsonConvert.SerializeObject(model);
             StringContent content = new StringContent(jsonData, Encoding.UTF8, "application/json");
-            var responseMessage = await client.PostAsync("https://localhost:44369/api/Testimonial", content);
+            var responseMessage = await client.PostAsync($"{_apiBaseUrl}/api/Testimonial", content);
             if (responseMessage.IsSuccessStatusCode)
             {
                 // Optionally, you can redirect to the index or another action
@@ -61,7 +65,7 @@ namespace HotelProject.UI.Controllers
         public async Task<IActionResult> DeleteTestimonial(int id)
         {
             var client = httpClientFactory.CreateClient();
-            var responseMessage = await client.DeleteAsync($"https://localhost:44369/api/Testimonial/{id}");
+            var responseMessage = await client.DeleteAsync($"{_apiBaseUrl}/api/Testimonial/{id}");
             if (responseMessage.IsSuccessStatusCode)
             {
                 // Optionally, you can redirect to the index or another action
@@ -78,7 +82,7 @@ namespace HotelProject.UI.Controllers
         public async Task<IActionResult> EditTestimonial(int id)
         {
             var client = httpClientFactory.CreateClient();
-            var responseMessage = await client.GetAsync($"https://localhost:44369/api/Testimonial/{id}");
+            var responseMessage = await client.GetAsync($"{_apiBaseUrl}/api/Testimonial/{id}");
             if (responseMessage.IsSuccessStatusCode)
             {
                 var jsonData = await responseMessage.Content.ReadAsStringAsync();
@@ -97,7 +101,7 @@ namespace HotelProject.UI.Controllers
             var client = httpClientFactory.CreateClient();
             var jsondata = JsonConvert.SerializeObject(model);
             StringContent content = new StringContent(jsondata, Encoding.UTF8, "application/json");
-            var responseMessage = await client.PutAsync("https://localhost:44369/api/Staff/", content);
+            var responseMessage = await client.PutAsync($"{_apiBaseUrl}/api/Staff/", content);
             if (responseMessage.IsSuccessStatusCode)
             {
                 return RedirectToAction("Index");

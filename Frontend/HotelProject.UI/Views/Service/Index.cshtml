@@ -2,28 +2,30 @@
 @{
     ViewData["Title"] = "Index";
     Layout = "~/Views/AdminLayout/_AdminLayout.cshtml";
+    int counter = 0;
 }
 
 <table class="table table-bordered">
     <tr>
         <th>#</th>
-        <th>Hizmet basligi adi</th>
+        <th>Service title name</th>
      
-        <th>Sil</th>
-        <th>Guncelle</th>
+        <th>Delete</th>
+        <th>Update</th>
         
     </tr>
     @foreach (var item in Model)
     {
+        counter++;
         <tr>
-            <td>@item.ServiceID</td>
+            <td>@counter</td>
             <td>@item.Title</td>
             
             <td>
-                <a asp-action="DeleteService" asp-controller="Service" asp-route-id="@item.ServiceID" class="btn mb-1 btn-rounded btn-outline-danger">Sil</a>
+                <a asp-action="DeleteService" asp-controller="Service" asp-route-id="@item.ServiceID" class="btn mb-1 btn-rounded btn-outline-danger">Delete</a>
             </td>
             <td>
-                <a asp-action="EditService" asp-controller="Service" asp-route-id="@item.ServiceID" class="btn mb-1 btn-rounded  btn-outline-primary">Guncelle</a>
+                <a asp-action="EditService" asp-controller="Service" asp-route-id="@item.ServiceID" class="btn mb-1 btn-rounded  btn-outline-primary">Update</a>
             </td>
            
         </tr>
@@ -31,4 +33,4 @@
 
 </table>
 
-<a href="/Service/CreateService" class="btn btn-info">Yeni Hizmet Grisi</a>
+<a href="/Service/CreateService" class="btn btn-info">Add New Service</a>

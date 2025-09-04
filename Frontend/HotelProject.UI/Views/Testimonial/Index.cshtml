@@ -2,36 +2,40 @@
 @{
     ViewData["Title"] = "Index";
     Layout = "~/Views/AdminLayout/_AdminLayout.cshtml";
+    int counter = 0;
 }
 
 <table class="table table-bordered">
     <tr>
         <th>#</th>
-        <th>Referans adi </th>
-        <th>Referans gorsel </th>
-        <th>Referans Unvan</th>
-        <th>Sil</th>
-        <th>Guncelle</th>
+        <th>Reference name </th>
+        <th>Reference Image </th>
+        <th>Reference Title</th>
+        <th>Delete</th>
+        <th>Update</th>
+        <th>Details</th>
      
     </tr>
     @foreach (var item in Model)
     {
+        counter++;
         <tr>
-            <td>@item.TestimonialID</td>
+            <td>@counter</td>
             <td>@item.Name</td>
+            <td>@item.Image</td>
             <td>@item.Title</td>
             <td>
-                <a asp-action="DeleteTestimonial" asp-controller="Testimonial" asp-route-id="@item.TestimonialID" class="btn mb-1 btn-rounded btn-outline-danger">Sil</a>
+                <a asp-action="DeleteTestimonial" asp-controller="Testimonial" asp-route-id="@item.TestimonialID" class="btn mb-1 btn-rounded btn-outline-danger">Delete</a>
             </td>
             <td>
-                <a asp-action="EditTestimonial" asp-controller="Testimonial" asp-route-id="@item.TestimonialID" class="btn mb-1 btn-rounded  btn-outline-primary">Guncelle</a>
+                <a asp-action="EditTestimonial" asp-controller="Testimonial" asp-route-id="@item.TestimonialID" class="btn mb-1 btn-rounded  btn-outline-primary">Update</a>
             </td>
             <td>
-                <a asp-action="DetailsTestimonial" asp-controller="Testimonial" asp-route-id="@item.TestimonialID" class="btn mb-1 btn-rounded btn-outline-info">Detaylar</a>
+                <a asp-action="DetailsTestimonial" asp-controller="Testimonial" asp-route-id="@item.TestimonialID" class="btn mb-1 btn-rounded btn-outline-info">Detaıls</a>
             </td>
         </tr>
     }
 
 </table>
 
-<a href="/Testimonial/CreateTestimonial" class="btn btn-info">Yeni Referans Grisi</a>
+<a href="/Testimonial/CreateTestimonial" class="btn btn-info">New Reference entry</a>

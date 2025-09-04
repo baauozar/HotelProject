@@ -5,20 +5,23 @@ namespace HotelProject.UI.Dtos.Register
     public class CreateNewUserDto
     {
         [Required]
-        public string Name { get; set; }
+        public string? Name { get; set; }
         [Required]
-        public string Surname { get; set; }
+        public string? Surname { get; set; }
         [Required]
-        public string UserName { get; set; }
+        public string? UserName { get; set; }
         [Required]
-        public string Email { get; set; }
+        public string? Email { get; set; }
         [Required]
-        public string City { get; set; }
+        public string? City { get; set; }
         [Required]
-        public string Password { get; set; }
+        public string? Password { get; set; }
         [Compare("Password", ErrorMessage = "Passwords do not match.")]
-        public string ConfirmPassword { get; set; }
-       
+        public string? ConfirmPassword { get; set; }
+
+      
+
+
 
     }
 }
