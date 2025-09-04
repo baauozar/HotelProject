@@ -362,9 +362,69 @@ MigrationBackup/
 # Fody - auto-generated XML schema
 FodyWeavers.xsd
 
-**/appsettings.json
+# =========================
+# Custom Security Patterns
+# =========================
+
+# Application settings with sensitive data
 **/appsettings.Development.json
-**/Program.cs
-/HotelProject.sln
-/HotelProject.sln
-/Frontend/HotelProject.UI/appsettings.json
+**/appsettings.local.json
+**/appsettings.*.local.json
+
+# Environment variable files
+.env
+.env.local
+.env.*.local
+*.env
+
+# Connection strings and secrets
+**/connectionstrings.json
+**/secrets.json
+**/secrets.*.json
+
+# Backup files that might contain sensitive data
+*.bak
+*.backup
+*.back
+*.old
+*.orig
+
+# Local database files
+*.db
+*.sqlite
+*.sqlite3
+*.db-shm
+*.db-wal
+
+# Logs that might contain sensitive information
+*.log
+logs/
+log/
+
+# Temporary files
+*.tmp
+*.temp
+tmp/
+temp/
+
+# IDE specific files
+.idea/
+.vscode/
+*.swp
+*.swo
+*~
+
+# OS specific files
+.DS_Store
+Thumbs.db
+desktop.ini
+
+# Certificate files
+*.cer
+*.crt
+*.key
+*.pem
+
+# JWT token files
+*.token
+*-token.txt
